@@ -1,0 +1,5 @@
+MYSQL_ROOT_PASSWORD=secret
+MYSQL_LOGIN=webserver_admin
+MYSQL_PASSWORD=admin
+MYSQL_NAME=webserver
+MYSQL_PORT=3036
