@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+    mysql:
+        image: mysql:latest
+        restart: unless-stopped
+        command:
+            - --secure-file-priv=/
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_LOGIN}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_TCP_PORT: ${MYSQL_PORT}
+
+    webserver:
+        image: webservice:latest
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+        depends_on:
+            - "mysql"
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_NAME: ${MYSQL_NAME}
+            MYSQL_LOGIN: ${MYSQL_LOGIN}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            CACHE_SERVERS: ${CACHE_SERVERS}
+
+    ignite-node-1:
+        image: apacheignite/ignite
+        container_name: ignite-node-1
+        ports:
+            - "10800:10800"
+
+    ignite-node-2:
+        image: apacheignite/ignite
+        container_name: ignite-node-2
+        ports:
+             - "10900:10800"

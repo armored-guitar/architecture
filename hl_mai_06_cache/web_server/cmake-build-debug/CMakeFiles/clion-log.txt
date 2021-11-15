@@ -1,0 +1,42 @@
+/Applications/IDE/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/alexandrrezanov/masters/7_semester/architecture/hl_mai_06_cache/web_server
+-- The C compiler identification is AppleClang 13.0.0.13000029
+-- The CXX compiler identification is AppleClang 13.0.0.13000029
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR) 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/lib/libz.tbd (found version "1.2.11") 
+CMake Error at CMakeLists.txt:10 (find_package):
+  By not providing "FindPoco.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "Poco", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "Poco" with any of
+  the following names:
+
+    PocoConfig.cmake
+    poco-config.cmake
+
+  Add the installation prefix of "Poco" to CMAKE_PREFIX_PATH or set
+  "Poco_DIR" to a directory containing one of the above files.  If "Poco"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/alexandrrezanov/masters/7_semester/architecture/hl_mai_06_cache/web_server/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/Users/alexandrrezanov/masters/7_semester/architecture/hl_mai_06_cache/web_server/cmake-build-debug/CMakeFiles/CMakeError.log".

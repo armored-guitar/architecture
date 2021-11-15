@@ -1,0 +1,6 @@
+MYSQL_ROOT_PASSWORD=secret
+MYSQL_LOGIN=webserver_admin
+MYSQL_PASSWORD=admin
+MYSQL_NAME=webserver
+MYSQL_PORT=3036
+CACHE_SERVERS="ignite-node-1:10800,ignite-node-2:10800"
