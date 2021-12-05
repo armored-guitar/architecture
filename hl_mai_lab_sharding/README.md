@@ -1,7 +1,7 @@
 # SQL webservice
 Сборка: в корне запускаем
 ```sh
-docker build . -t webservice
+docker build . -t webservice_3
 ```
 Дефолтный порт нашего вебсервиса это 8080 port хоста
 Для запуска необходимо поднять два контейнера

@@ -27,6 +27,7 @@ namespace database
             unsigned short        &age();
 
             static void init();
+            static void preload(const std::string & str);
             static Person fingByLogin(std::string login);
             static std::vector<Person> findByName(std::string first_name,std::string last_name);
             void save_to_db();
