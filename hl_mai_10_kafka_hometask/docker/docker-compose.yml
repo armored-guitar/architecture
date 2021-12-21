@@ -1,0 +1,61 @@
+version: '3.3'
+services:
+    zookeeper:
+        image: wurstmeister/zookeeper
+        container_name: zookeeper
+
+    kafka:
+        image: wurstmeister/kafka
+        depends_on:
+            - "zookeeper"
+        container_name: kafka
+        environment:
+            KAFKA_ADVERTISED_HOST_NAME: kafka
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: unless-stopped
+        command:
+            - --secure-file-priv=/
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_LOGIN}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_TCP_PORT: ${MYSQL_PORT}
+
+    webserver:
+        image: armoredguitar/architectures_4:server
+        container_name: webserver
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+        depends_on:
+            - "kafka"
+            - "mysql"
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_NAME: ${MYSQL_NAME}
+            MYSQL_LOGIN: ${MYSQL_LOGIN}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            QUEUE_HOST: ${QUEUE_HOST} \
+            QUEUE_TOPIC: ${QUEUE_TOPIC} \
+
+    writer:
+        image: armoredguitar/architectures_4:writer
+        restart: unless-stopped
+        container_name: writer
+        depends_on:
+            - "kafka"
+            - "mysql"
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_NAME: ${MYSQL_NAME}
+            MYSQL_LOGIN: ${MYSQL_LOGIN}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            QUEUE_HOST: ${QUEUE_HOST} \
+            QUEUE_TOPIC: ${QUEUE_TOPIC} \
+            QUEUE_GROUP_ID: ${QUEUE_GROUP_ID}

@@ -1,0 +1,36 @@
+FROM ubuntu:latest
+EXPOSE 8080
+ENV DEBIAN_FRONTEND=noninteractive \
+    MYSQL_HOST=127.0.0.1 \
+    MYSQL_PORT=3306 \
+    MYSQL_NAME=webserver \
+    MYSQL_LOGIN=root \
+    MYSQL_PASSWORD=admin \
+    QUEUE_HOST=kafka-node-1 \
+    QUEUE_TOPIC=webserver
+
+RUN apt-get update -y && apt-get install -y \
+    git \
+    cmake \
+    g++ \
+    libpoco-dev \
+    libboost-all-dev \
+    librdkafka-dev
+
+RUN git clone https://github.com/mfontanini/cppkafka && cd cppkafka && mkdir build && cd build && cmake .. && make && make install
+
+
+COPY web_server web_server
+
+WORKDIR /web_server/build
+
+RUN cmake .. && cmake --build . --target event_server -- -j 9
+
+CMD /web_server/build/event_server \
+ --host=$MYSQL_HOST\
+ --port=$MYSQL_PORT\
+ --database=$MYSQL_NAME\
+ --login=$MYSQL_LOGIN\
+ --password=$MYSQL_PASSWORD \
+ --queue_host=$QUEUE_HOST \
+ --queue_topic=$QUEUE_TOPIC
